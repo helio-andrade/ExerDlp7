@@ -16,6 +16,7 @@ type
     EditVH: TEdit;
     EditPD: TEdit;
     SaLiq: TButton;
+    procedure SaLiqClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -28,5 +29,22 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TSalario.SaLiqClick(Sender: TObject);
+var
+  HT, VH, PD, TD, SB, SL: Real;
+  FORMATO: String;
+begin
+  HT := StrToFloat(EditHT.Text);
+  VH := StrToFloat(EditVH.Text);
+  PD := StrToFloat(EditPD.Text);
+
+  SB := HT * VH;
+  TD := SB * (PD/100);
+  SL := SB - TD;
+
+  FORMATO := FormatFloat('#,##0.00;(#,##0.00);ZERADO', SL)
+  Label4.Caption := FORMATO;
+end;
 
 end.

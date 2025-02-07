@@ -46,7 +46,6 @@ object Salario: TSalario
     Width = 121
     Height = 21
     TabOrder = 0
-    Text = 'EditHT'
   end
   object EditVH: TEdit
     Left = 184
@@ -54,7 +53,6 @@ object Salario: TSalario
     Width = 121
     Height = 21
     TabOrder = 1
-    Text = 'EditVH'
   end
   object EditPD: TEdit
     Left = 184
@@ -62,7 +60,6 @@ object Salario: TSalario
     Width = 121
     Height = 21
     TabOrder = 2
-    Text = 'EditPD'
   end
   object SaLiq: TButton
     Left = 64
@@ -71,5 +68,6 @@ object Salario: TSalario
     Height = 25
     Caption = 'Sal'#225'rio Liquido'
     TabOrder = 3
+    OnClick = SaLiqClick
   end
 end

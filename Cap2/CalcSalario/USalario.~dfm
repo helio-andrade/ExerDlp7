@@ -37,9 +37,8 @@ object Salario: TSalario
   object Label4: TLabel
     Left = 187
     Top = 125
-    Width = 32
+    Width = 3
     Height = 13
-    Caption = 'Label4'
   end
   object EditHT: TEdit
     Left = 184
@@ -65,12 +64,13 @@ object Salario: TSalario
     TabOrder = 2
     Text = 'EditPD'
   end
-  object Button1: TButton
+  object SaLiq: TButton
     Left = 64
     Top = 120
     Width = 115
     Height = 25
     Caption = 'Sal'#225'rio Liquido'
     TabOrder = 3
+    OnClick = SaLiqClick
   end
 end
