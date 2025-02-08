@@ -33,6 +33,7 @@ implementation
 procedure TSalario.SaLiqClick(Sender: TObject);
 var
   HT, VH, PD, TD, SB, SL: Real;
+  FORMATO: String;
 begin
   HT := StrToFloat(EditHT.Text);
   VH := StrToFloat(EditVH.Text);
@@ -42,7 +43,8 @@ begin
   TD := SB * (PD/100);
   SL := SB - TD;
 
-  Label4.Caption := FloatToStr(SL);
+  FORMATO := FormatFloat('#,##0.00;(#,##0.00);ZERADO', SL)
+  Label4.Caption := FORMATO;
 end;
 
 end.

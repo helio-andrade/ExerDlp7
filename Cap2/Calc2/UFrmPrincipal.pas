@@ -1,0 +1,46 @@
+unit UFrmPrincipal;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, UCalculadora;
+
+type
+  TFrmPrincipal = class(TForm)
+    edtNumero1: TEdit;
+    edtNumero2: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    btnSomar: TButton;
+    lblResultado: TLabel;
+    procedure btnSomarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmPrincipal: TFrmPrincipal;
+
+implementation
+
+{$R *.dfm}
+
+
+
+
+procedure TFrmPrincipal.btnSomarClick(Sender: TObject);
+var
+  Num1, Num2, Resultado: Double;
+begin
+  Num1 := StrToFloat(edtNumero1.Text);
+  Num2 := StrToFloat(edtNumero2.Text);
+
+  Resultado := Somar(Num1, Num2);
+
+  lblResultado.Caption := 'Resultado: ' + FloatToStr(Resultado);
+end;
+
+end.

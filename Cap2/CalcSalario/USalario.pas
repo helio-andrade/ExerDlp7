@@ -43,7 +43,7 @@ begin
   TD := SB * (PD/100);
   SL := SB - TD;
 
-  FORMATO := FormatFloat('#,##0.00;(#,##0.00);ZERADO', SL)
+  FORMATO := FormatFloat('#,##0.00;(#,##0.00);ZERADO', SL);
   Label4.Caption := FORMATO;
 end;
 

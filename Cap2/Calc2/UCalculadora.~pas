@@ -1,0 +1,19 @@
+unit UCalculadora;
+
+interface
+
+type
+  TCalculadora = class
+  public
+    function Somar(A, B: Double): Double;
+  end;
+
+implementation
+
+function TCalculadora.Somar(A, B: Double): Double;
+begin
+  Result := A + B;
+end;
+
+end.
+ 
