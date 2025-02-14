@@ -2,11 +2,12 @@ unit Itens;
 
 interface
 
-uses Math;
+uses Math, SysUtils;
 
 function ConversaoFahrenheit(Celsius: Double): Double;
 function ConversaoCelsius(Fahrenheit: Double): Double;
 function Volume(Raio, Altura: Double): Double;
+function Desempenho(ConsumoMedio, Tempo, Distancia, Preco: Double): String;
 
 implementation
 
@@ -28,5 +29,20 @@ begin
   Result := Pi * Power(Raio, 2) * Altura;
 end;
 
-end.
+// Item #4: Calcular a quantiade de combustível consumida
+function Desempenho(ConsumoMedio, Tempo, Distancia, Preco: Double): String;
+var
+  VelocidadeMedia, LitrosGastos, CustoViagem: Double;
+begin
+  VelocidadeMedia := Distancia / Tempo;
+  LitrosGastos := Distancia / ConsumoMedio;
+  CustoViagem := LitrosGastos * Preco;
 
+  Result := Format(
+    'Foram gastos %.2f litros de combustível para percorrer %.2f km'
+    + #13#10 + 'a uma velocidade média de %.2f km/h,'
+    + #13#10 + 'o que custou R$ %.2f',
+    [LitrosGastos, Distancia, VelocidadeMedia, CustoViagem]);
+end;
+
+end.

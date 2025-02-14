@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ComCtrls, Itens, StdCtrls;
+  Dialogs, ComCtrls, Itens, StdCtrls, Buttons, ExtCtrls;
 
 type
   TFrmMain = class(TForm)
@@ -26,13 +26,47 @@ type
     Edit3: TEdit;
     Label6: TLabel;
     Button3: TButton;
+    TabSheet4: TTabSheet;
+    Memo1: TMemo;
+    TabSheet5: TTabSheet;
+    lblConsumoMedio: TLabel;
+    lblTempoViagem: TLabel;
+    edtConsumoMedio: TEdit;
+    edtTempoViagem: TEdit;
+    lblResultado: TLabel;
+    edtDistanciaPercorrida: TEdit;
+    lblDistanciaPercorrida: TLabel;
+    btnCalcularConsumo: TBitBtn;
+    edtPrecoCombustivel: TEdit;
+    lblPrecoComustivel: TLabel;
+    TabSheet6: TTabSheet;
+    Image1: TImage;
+    lblComprimento: TLabel;
+    edtComprimento: TEdit;
+    Label8: TLabel;
+    edtLargura: TEdit;
+    Label9: TLabel;
+    edtAltura: TEdit;
+    lblVolume: TLabel;
+    btnCalcularVolume: TBitBtn;
+    lblC: TLabel;
+    lblA: TLabel;
+    lblB: TLabel;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure edtCelsiusKeyPress(Sender: TObject; var Key: Char);
     procedure Edit1KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit2KeyPress(Sender: TObject; var Key: Char);
     procedure Edit3KeyPress(Sender: TObject; var Key: Char);
-    procedure Button1KeyPress(Sender: TObject; var Key: Char);
+    procedure btnCalcularConsumoClick(Sender: TObject);
+    procedure btnCalcularVolumeClick(Sender: TObject);
+    procedure TabSheet2Show(Sender: TObject);
+    procedure TabSheet1Show(Sender: TObject);
+    procedure TabSheet3Show(Sender: TObject);
+    procedure TabSheet5Show(Sender: TObject);
+    procedure edtPrecoCombustivelKeyPress(Sender: TObject; var Key: Char);
+    procedure TabSheet6Show(Sender: TObject);
   private
     { Private declarations }
   public
@@ -90,8 +124,7 @@ begin
   if TryStrToFloat(Edit2.Text, Raio) and TryStrToFloat(Edit3.Text, Altura) then
   begin
     // Calcula o volume e exibe no label
-    Label5.Caption := 'Volume: ' + FormatFloat('0.0000', Volume(Raio, Altura))
-                      + ' m³';
+    Label5.Caption := 'Volume: ' + FormatFloat('0.0000', Volume(Raio, Altura)) + ' m³';
   end
   else
   begin
@@ -132,9 +165,78 @@ begin
   // Verifica se a tecla pressionada é Enter
   if Key = #13 then
   begin
-    Button3Click(Sender); // Chama o método de cálculo do volume
+    btnCalcularConsumoClick(Sender); // Chama o método de cálculo do volume
   end;
 end;
 
-end.
+procedure TFrmMain.btnCalcularConsumoClick(Sender: TObject);
+var
+  Consumo, Duracao, DistanciaPercorrida, PrecoCombustivel: Double;
+begin
+  if TryStrToFloat(edtConsumoMedio.Text, Consumo) and
+     TryStrToFloat(edtTempoViagem.Text, Duracao) and
+     TryStrToFloat(edtDistanciaPercorrida.Text, DistanciaPercorrida) and
+     TryStrToFloat(edtPrecoCombustivel.Text, PrecoCombustivel) then
+  begin
+    lblResultado.Caption := Desempenho(Consumo, Duracao, DistanciaPercorrida, PrecoCombustivel);
+  end
+  else
+  begin
+    ShowMessage('Por favor, insira valores válidos!');
+  end;
+end;
 
+procedure TFrmMain.TabSheet2Show(Sender: TObject);
+begin
+  Edit1.SetFocus;
+end;
+
+procedure TFrmMain.TabSheet1Show(Sender: TObject);
+begin
+  edtCelsius.SetFocus;
+end;
+
+procedure TFrmMain.TabSheet3Show(Sender: TObject);
+begin
+  edit2.SetFocus;
+end;
+
+procedure TFrmMain.TabSheet5Show(Sender: TObject);
+begin
+  edtConsumoMedio.SetFocus;
+end;
+
+procedure TFrmMain.edtPrecoCombustivelKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if Key = #13 then
+  begin
+    btnCalcularConsumoClick(Sender);
+  end;
+
+end;
+
+
+procedure TFrmMain.btnCalcularVolumeClick(Sender: TObject);
+var
+  comprimento, largura, altura: Double;
+begin
+  comprimento := StrToFloat(edtComprimento.Text);
+  largura := StrToFloat(edtLargura.Text);
+  altura := StrToFloat(edtAltura.Text);
+
+  lblA.Caption := ' = ' + edtComprimento.Text + ' m';
+  lblB.Caption := ' = ' + edtLargura.Text + ' m';
+  lblC.Caption := ' = ' + edtAltura.Text + ' m';
+
+  lblVolume.Caption := Format(
+    'V = %.2f m³',
+    [comprimento * largura * altura]);
+end;
+
+procedure TFrmMain.TabSheet6Show(Sender: TObject);
+begin
+  edtComprimento.SetFocus;
+end;
+
+end.
